@@ -1,0 +1,104 @@
+<html class="no-js" ng-app="app" ng-controller="RootController as rootVm">
+<head>
+  <!-- 3.9.3, lib 3.9.3 -->
+  <base href="/">
+  <meta charset="utf-8">
+  <title>PMMI Videos</title>
+  <meta name="description" content="JW Showcase">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:title" content="PMMI Videos">
+  <meta property="og:description" content="JW Showcase">
+  <meta property="og:image" content="https://cdn.jwplayer.com/images/L7oJEt6A.png">
+  <meta property="og:site_name" content="PMMI Videos">
+  <meta property="og:url" content="http://preview-uz5vis6d.jwpapp.com/">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="canonical" href="http://preview-uz5vis6d.jwpapp.com/">
+  <link rel="icon" href="/i/favicon/9liwefec.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/i/apple-touch-icon/9liwefec.png">
+  <!-- Safari web app -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Schema.org -->
+  <script type="application/ld+json" id="schema"></script>
+  <script src="/v/showcase/3.9.3/scripts/bridge.js"></script>
+  <link rel="stylesheet" href="/v/showcase/3.9.3/styles/vendor.css">
+  <link rel="stylesheet" href="/v/showcase/3.9.3/styles/main.css">
+</head>
+<body class="jw-theme-{{ ::rootVm.config.theme }} jw-flag-loading-config jw-flag-no-focus">
+
+<jw-header ng-if="rootVm.config.options.enableHeader"></jw-header>
+
+<ui-view></ui-view>
+
+<jw-footer ng-if="rootVm.config.options.enableFooter"></jw-footer>
+
+<div class="jw-cover jw-loading" ng-show="rootVm.appStore.loading">
+  <div class="jw-loading-icon">
+    <div class="jw-rotate-animation">
+      <i class="jwy-icon jwy-icon-buffer"></i>
+    </div>
+  </div>
+</div>
+
+<div class="jw-offline-message">
+  You appear to be offline. <a ng-click="rootVm.reconnect()">Retry</a>
+</div>
+
+
+<script src="/v/showcase/3.9.3/scripts/vendor.1.js"></script>
+
+<script src="/v/showcase/3.9.3/scripts/vendor.2.js"></script>
+
+<script src="/v/showcase/3.9.3/scripts/application.js"></script>
+
+<script>
+  window.config = {
+    "assets": {
+      "banner": "https://cdn.jwplayer.com/images/L7oJEt6A.png"
+    },
+    "content": [
+      {
+        "enableText": true,
+        "featured": true,
+        "playlistId": "5azcipMq"
+      },
+      {
+        "enableText": true,
+        "playlistId": "Y5cSzoaU"
+      },
+      {
+        "enableText": true,
+        "playlistId": "EA1xpoZN"
+      }
+    ],
+    "description": "JW Showcase",
+    "footerText": null,
+    "options": {
+      "backgroundColor": null,
+      "enableAddToHome": false,
+      "enableContinueWatching": true,
+      "enableCookieNotice": false,
+      "enableHeader": true,
+      "enableInVideoSearch": false,
+      "highlightColor": null,
+      "rightRail": {
+        "enabled": false
+      },
+      "showcaseContentOnly": false,
+      "useRecommendationsPlaylist": false,
+      "videoTitlePosition": "below"
+    },
+    "player": "Ehad0JRa",
+    "recommendationsPlaylist": null,
+    "searchPlaylist": null,
+    "siteName": "PMMI Videos",
+    "theme": "light",
+    "version": "2"
+  };
+  // window.configLocation = '/config.json';
+</script>
+
+<script src="/v/showcase/3.9.3/scripts/scripts.js"></script>
+
+</body>
+</html>
