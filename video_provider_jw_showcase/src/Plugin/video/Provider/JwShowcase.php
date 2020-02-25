@@ -1,9 +1,10 @@
 <?php
 
-namespace Drupal\video_provider_jwplayer\Plugin\video\Provider;
+namespace Drupal\video_provider_jw_showcase\Plugin\video\Provider;
 
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\video\ProviderPluginBase;
 
 /**
  * A JW PlayList provider plugin.
@@ -19,10 +20,48 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  *   stream_wrapper = "jwshowcase"
  * )
  */
-class JwShowcase extends JwBaseClass {
+class JwShowcase extends ProviderPluginBase {
 
   use MessengerTrait;
   use StringTranslationTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function renderEmbedCode($settings) {
+    $id = $this->getVideoMetadata()['id'];
+
+    $output['ui-view'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'ui-view',
+      '#value' => '',
+    ];
+
+    $output['container'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => 'jw-cover jw-loading',
+        'ng-show' => 'rootVm.appStore.loading',
+      ],
+    ];
+
+    $output['container']['jw_icon'] = [
+      '#prefix' => '<div class="jw-loading-icon">',
+      '#markup' => '<div class="jw-rotate-animation"><i class="jwy-icon jwy-icon-buffer"></i></div>',
+      '#suffix' => '</div>',
+    ];
+
+    $output['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#value' => "window.configLocation = 'https://$id.jwpapp.com/config.json';",
+      ],
+      'jwshowcase-config-location',
+    ];
+
+    return $output;
+  }
 
   /**
    * {@inheritdoc}

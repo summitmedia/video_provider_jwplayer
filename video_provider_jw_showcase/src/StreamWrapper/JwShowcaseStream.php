@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\video_provider_jwplayer\StreamWrapper;
+namespace Drupal\video_provider_jw_showcase\StreamWrapper;
 
 use Drupal\video\StreamWrapper\VideoRemoteStreamWrapper;
 
@@ -36,6 +36,16 @@ class JwShowcaseStream extends VideoRemoteStreamWrapper {
    */
   public static function baseUrl() {
     return self::$baseUrl;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExternalUrl() {
+    $path = str_replace('\\', '/', $this->getTarget());
+    $base_url = parse_url(static::baseUrl());
+
+    return $base_url['scheme'] . '://' . $path . '.' . $base_url['host'];
   }
 
 }

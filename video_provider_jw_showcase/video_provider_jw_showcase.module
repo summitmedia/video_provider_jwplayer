@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * @file
+ * Contains video_provider_jw_showcase.module.
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\StreamWrapper\StreamWrapperManager;
+use Drupal\Core\Template\Attribute;
+use Drupal\file\Entity\File;
+use Drupal\video_provider_jw_showcase\PathProcessor\JwShowcasePathProcessor;
+
+/**
+ * Implements template_preprocess_html().
+ */
+function video_provider_jw_showcase_preprocess_html(&$variables) {
+  if (empty(getJwshowcaseNode())) {
+    return;
+  }
+  // Added JW Showcase HTML element attributes.
+  $attributes = [];
+  $attributes['ng-app'] = 'app';
+  $attributes['ng-controller'] = 'RootController as rootVm';
+  $variables['html_attributes'] = new Attribute($attributes);
+
+  // Added JW Showcase classes to body.
+  $variables['attributes']['class'][] = 'jw-theme-{{ ::rootVm.config.theme }} jw-flag-loading-config jw-flag-no-focus';
+
+  // Added JW Showcase classes to body.
+  $variables['#attached']['library'][] = 'video_provider_jw_showcase/jw-showcase.bridge';
+  $variables['#attached']['library'][] = 'video_provider_jw_showcase/jw-showcase.app';
+
+  // Added base tag to the head
+  // @see https://github.com/jwplayer/jw-showcase/wiki/Getting-Started#step-3-configure-the-application
+  $base_tag = [
+    '#tag' => 'base',
+    '#attributes' => [
+      'href' => JwShowcasePathProcessor::getBaseNodeShowcasePath($_SERVER['REQUEST_URI']),
+    ],
+  ];
+  $variables['page']['#attached']['html_head'][] = [$base_tag, 'base'];
+}
+
+/**
+ * Implements hook_metatags_alter().
+ */
+function video_provider_jw_showcase_metatags_alter(array &$metatags, array &$context) {
+  if (
+    isset($metatags['apple-mobile-web-app-capable']) ||
+    empty(getJwshowcaseNode())
+  ) {
+    return;
+  }
+
+  $metatags['apple-mobile-web-app-capable'] = 'yes';
+}
+
+/**
+ * Get the jwshowcase node from current route.
+ *
+ * @return \Drupal\node\Entity\Node|null
+ */
+function getJwshowcaseNode() {
+  $routeService = \Drupal::routeMatch();
+  if ($routeService->getRouteName() === 'entity.node.canonical') {
+    if (empty($node = $routeService->getParameter('node'))) {
+      // In most cases it shouldn't be happen.
+      return NULL;
+    }
+    // Added cache for nodes.
+    $cacheService = \Drupal::cache();
+    $cacheTag = 'node:' . $node->id();
+    $cid = __FUNCTION__ . '_' . $cacheTag;
+    if ($cache = $cacheService->get($cid)) {
+      if ($cache->data === TRUE) {
+        return $node;
+      }
+      // return NULL.
+      return $cache->data;
+    }
+    $VideoFields = array_filter($node->getFieldDefinitions(), function ($field) {
+      /** @var \Drupal\Core\Field\FieldDefinitionInterface $field */
+      return $field->getType() == 'video';
+    });
+    foreach ($VideoFields as $field) {
+      $fieldValue = $node->{$field->getName()}->getValue();
+      $target_id = @$fieldValue[0]['target_id'];
+      if (!$target_id) {
+        continue;
+      }
+      $file = File::load($target_id);
+      if (!$file) {
+        continue;
+      }
+      $scheme = StreamWrapperManager::getScheme($file->getFileUri());
+      if ($scheme === "jwshowcase") {
+        $cacheService->set($cid, TRUE, Cache::PERMANENT, [$cacheTag]);
+        return $node;
+      }
+    }
+    $cacheService->set($cid, NULL, Cache::PERMANENT, [$cacheTag]);
+  }
+
+  return NULL;
+}
