@@ -1,0 +1,13 @@
+services:
+  stream_wrapper.jwvideo:
+    class: Drupal\video_provider_jwplayer\StreamWrapper\JwVideoStream
+    tags:
+      - { name: stream_wrapper, scheme: jwvideo }
+  stream_wrapper.jwplaylist:
+    class: Drupal\video_provider_jwplayer\StreamWrapper\JwPlayListStream
+    tags:
+      - { name: stream_wrapper, scheme: jwplaylist }
+  stream_wrapper.jwshowcase:
+    class: Drupal\video_provider_jwplayer\StreamWrapper\JwShowcaseStream
+    tags:
+      - { name: stream_wrapper, scheme: jwshowcase }

@@ -1,0 +1,23 @@
+dependencies:
+  config:
+    - field.storage.node.field_showcase
+    - node.type.video_showcase
+  module:
+    - video
+id: node.video_showcase.field_showcase
+field_name: field_showcase
+entity_type: node
+bundle: video_showcase
+label: Showcase
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_extensions: ''
+  file_directory: 'videos/[date:custom:Y]-[date:custom:m]'
+  max_filesize: ''
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: video

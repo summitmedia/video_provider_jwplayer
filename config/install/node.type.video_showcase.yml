@@ -1,0 +1,7 @@
+name: 'Video Showcase'
+type: video_showcase
+description: 'For video showcase provided by JW player.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

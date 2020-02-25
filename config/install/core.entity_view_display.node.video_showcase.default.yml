@@ -1,0 +1,24 @@
+dependencies:
+  config:
+    - field.field.node.video_showcase.field_showcase
+    - node.type.video_showcase
+  module:
+    - user
+    - video
+id: node.video_showcase.default
+targetEntityType: node
+bundle: video_showcase
+mode: default
+content:
+  field_showcase:
+    weight: 0
+    label: hidden
+    settings:
+      width: '854'
+      height: '480'
+      autoplay: true
+    third_party_settings: {  }
+    type: video_embed_player
+    region: content
+hidden:
+  links: true
