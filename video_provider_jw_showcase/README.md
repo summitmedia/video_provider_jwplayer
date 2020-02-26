@@ -3,7 +3,7 @@ JW Showcase module is an implementation of the video embedded provider plugin in
 
 ## Installation
 To use this module you need to unzip [the latest precompiled jw-showcase archive][https://github.com/jwplayer/jw-showcase/releases/] to ```docroot/libraries/jw-showcase``` folder.
-To to this with composer, add to composer.json
+To do this with composer, add to composer.json
 ```
 {
     "repositories": {
