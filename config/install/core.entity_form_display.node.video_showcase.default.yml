@@ -1,0 +1,94 @@
+dependencies:
+  config:
+    - field.field.node.video_showcase.field_showcase
+    - node.type.video_showcase
+  module:
+    - content_moderation
+    - path
+    - video
+id: node.video_showcase.default
+targetEntityType: node
+bundle: video_showcase
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_showcase:
+    weight: 1
+    settings:
+      allowed_providers:
+        jwshowcase: jwshowcase
+        instagram: 0
+        vimeo: 0
+        dailymotion: 0
+        youtube: 0
+        facebook: 0
+        vine: 0
+        jwvideo: 0
+        jwplaylist: 0
+      file_directory: video-thumbnails/showcase
+      uri_scheme: public
+    third_party_settings: {  }
+    type: video_embed
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 8
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 9
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

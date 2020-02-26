@@ -1,0 +1,19 @@
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.video_showcase.field_showcase
+    - node.type.video_showcase
+  module:
+    - user
+id: node.video_showcase.teaser
+targetEntityType: node
+bundle: video_showcase
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_showcase: true
