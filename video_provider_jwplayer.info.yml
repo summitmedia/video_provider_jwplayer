@@ -1,6 +1,6 @@
 name: Video Provider JW player.
 type: module
-description: A video provider.
+description: A JW player video provider.
 package: Video
 core: 8.x
 dependencies:

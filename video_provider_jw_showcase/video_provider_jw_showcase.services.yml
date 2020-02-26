@@ -1,0 +1,13 @@
+services:
+  stream_wrapper.jwshowcase:
+    class: Drupal\video_provider_jw_showcase\StreamWrapper\JwShowcaseStream
+    tags:
+      - { name: stream_wrapper, scheme: jwshowcase }
+  path_processor.video_provider_jw_showcase:
+    class: Drupal\video_provider_jw_showcase\PathProcessor\JwShowcasePathProcessor
+    tags:
+      # path_processor_inbound priority should be more than 200 to execute before PathProcessorFront.
+      # To support path prefix for the main page.
+      - { name: path_processor_inbound, priority: 201 }
+      # path_processor_outbound priority doesn't matter.
+      - { name: path_processor_outbound, priority: 0 }

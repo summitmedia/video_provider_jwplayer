@@ -1,5 +1,6 @@
-# All libraries supported by video_provider_jwplayer module.
+# All libraries supported by video_provider_jw_showcase module.
 jw-showcase.bridge:
+  header: true
   remote: https://github.com/jwplayer/jw-showcase
   license:
     name: Apache License 2.0
@@ -8,10 +9,6 @@ jw-showcase.bridge:
   version: 3.x
   js:
     /libraries/jw-showcase/scripts/bridge.js: { minified: true }
-  css:
-    component:
-      libraries/jw-showcase/styles/vendor.css: {}
-      libraries/jw-showcase/styles/main.css: {}
 jw-showcase.app:
   remote: https://github.com/jwplayer/jw-showcase
   license:
@@ -24,5 +21,8 @@ jw-showcase.app:
     /libraries/jw-showcase/scripts/vendor.2.js: { minified: true }
     /libraries/jw-showcase/scripts/application.js: { minified: true }
     /libraries/jw-showcase/scripts/scripts.js: { minified: true }
-
+  css:
+    component:
+      /libraries/jw-showcase/styles/vendor.css: {}
+      /libraries/jw-showcase/styles/main.css: {}
 
