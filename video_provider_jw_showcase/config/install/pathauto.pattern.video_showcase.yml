@@ -1,0 +1,19 @@
+dependencies:
+  module:
+    - node
+id: video_showcase
+label: 'Video Showcase'
+type: 'canonical_entities:node'
+pattern: '/showcase/[node:title]'
+selection_criteria:
+  2d41b0b8-4090-42d5-b3a4-d8114a1215a0:
+    id: node_type
+    bundles:
+      video_showcase: video_showcase
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 2d41b0b8-4090-42d5-b3a4-d8114a1215a0
+selection_logic: and
+weight: -5
+relationships: {  }

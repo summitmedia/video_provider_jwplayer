@@ -1,0 +1,9 @@
+name: Video Provider for JW Showcase.
+type: module
+description: A JW Showcase video provider.
+package: Video
+core: 8.x
+dependencies:
+  - node
+  - pathauto
+  - video

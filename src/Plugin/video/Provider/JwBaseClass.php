@@ -33,8 +33,10 @@ abstract class JwBaseClass extends ProviderPluginBase {
       '#type' => 'html_tag',
       '#tag' => 'script',
       '#attributes' => [
-        // Ignore for Rocket Loader.
-        // @see README.md for more details.
+        // Ignore for Cloudflare Rocket Loader.
+        // Fixed ```Error: jwplayer(…).setup is not a function```.
+        // @link https://support.cloudflare.com/hc/en-us/articles/200168056-What-does-Rocket-Loader-do-
+        // @link https://support.cloudflare.com/hc/en-us/articles/200169436-How-can-I-have-Rocket-Loader-ignore-specific-JavaScripts-
         'data-cfasync' => 'false',
         'src' => 'https://cdn.jwplayer.com/players/' . $data['id'] . '-' . self::PLAYER_ID . '.js',
       ],
