@@ -33,10 +33,14 @@ function video_provider_jw_showcase_preprocess_html(&$variables) {
 
   // Added base tag to the head
   // @see https://github.com/jwplayer/jw-showcase/wiki/Getting-Started#step-3-configure-the-application
+  $current_uri = JwShowcasePathProcessor::getBaseNodeShowcasePath($_SERVER['REQUEST_URI']);
+  if (substr_compare($current_uri, '/', -1) !== 0) {
+    $current_uri = $current_uri . '/';
+  }
   $base_tag = [
     '#tag' => 'base',
     '#attributes' => [
-      'href' => JwShowcasePathProcessor::getBaseNodeShowcasePath($_SERVER['REQUEST_URI']),
+      'href' => $current_uri,
     ],
   ];
   $variables['page']['#attached']['html_head'][] = [$base_tag, 'base'];
