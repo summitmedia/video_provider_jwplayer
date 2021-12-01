@@ -28,9 +28,12 @@ class JwShowcasePathProcessor implements InboundPathProcessorInterface, Outbound
    * {@inheritdoc}
    */
   public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
+    // Return Path without parameters if this is a showcase path.
     if (
       empty($request) ||
-      substr($path, 0, strlen(self::SHOWCASE_PATH_PREFIXES)) !== self::SHOWCASE_PATH_PREFIXES
+      $request->attributes->get('_route') !== 'entity.node.canonical' ||
+      substr($path, 0, strlen(self::SHOWCASE_PATH_PREFIXES)) !== self::SHOWCASE_PATH_PREFIXES ||
+      substr($_SERVER['REQUEST_URI'], 0, strlen(self::SHOWCASE_PATH_PREFIXES)) !== self::SHOWCASE_PATH_PREFIXES
     ) {
       return $path;
     }
@@ -48,13 +51,11 @@ class JwShowcasePathProcessor implements InboundPathProcessorInterface, Outbound
    *   Original base node showcase path.
    */
   public static function getBaseNodeShowcasePath(string $path) {
+    // Check if this is a showcase path with custom parameters.
     $pattern = '/^\/showcase\/([\w\W]+)\/[m|p]\/[\w\W]+/m';
     preg_match($pattern, $path, $matches);
     if (!empty($matches[1])) {
-      return self::SHOWCASE_PATH_PREFIXES . $matches[1] . '/';
-    }
-    elseif (substr_compare($path, '/', -1) !== 0) {
-      $path = $path . '/';
+      return self::SHOWCASE_PATH_PREFIXES . $matches[1];
     }
 
     return $path;
